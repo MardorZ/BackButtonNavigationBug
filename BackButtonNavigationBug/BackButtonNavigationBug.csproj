@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>BackButtonNavigationBug</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<ApplicationTitle>BackButtonNavigationBug</ApplicationTitle>
+		<ApplicationId>com.companyname.app</ApplicationId>
+		<ApplicationIdGuid>85C81D9D-257A-496B-96D8-E4922B5D6864</ApplicationIdGuid>
+
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+		
+		<UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<ShinyVersion>3.0.0-alpha-0495</ShinyVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+	<DefineConstants>$(DefineConstants);PLATFORM</DefineConstants>
+		<SupportedOSPlatformVersion>26.0</SupportedOSPlatformVersion>
+    </PropertyGroup>
+	
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+		<SupportedOSPlatformVersion>14.2</SupportedOSPlatformVersion>
+		<DefineConstants>$(DefineConstants);APPLE;PLATFORM</DefineConstants>
+		<RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
+		<RuntimeIdentifier Condition="'$(Configuration)' == 'Debug'">iossimulator-x64</RuntimeIdentifier>		
+	</PropertyGroup>
+	
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
+		<SupportedOSPlatformVersion>14.0</SupportedOSPlatformVersion>
+		<DefineConstants>$(DefineConstants);APPLE;PLATFORM</DefineConstants>
+	</PropertyGroup>
+	
+
+	<ItemGroup>
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+
+		<MauiImage Include="Resources\Images\*" />
+		<MauiFont Include="Resources\Fonts\*" />
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+		<MauiAsset Include="appsettings.json" LogicalName="appsettings.json" />
+		<MauiAsset Include="appsettings.android.json" LogicalName="appsettings.android.json" />
+		<MauiAsset Include="appsettings.apple.json" LogicalName="appsettings.apple.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.0.0" />
+		<PackageReference Include="Prism.DryIoc.Maui" Version="8.1.273-pre" />
+		<PackageReference Include="ReactiveUI.Fody" Version="18.4.26" />
+		<PackageReference Include="Shiny.Framework" Version="3.0.0-alpha-0056" />
+		<PackageReference Include="Shiny.Extensions.Configuration" Version="$(ShinyVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="DetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+</Project>
