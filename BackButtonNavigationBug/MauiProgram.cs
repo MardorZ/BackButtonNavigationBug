@@ -53,6 +53,8 @@ namespace BackButtonNavigationBug
 
 
             s.RegisterForNavigation<MainPage, MainViewModel>();
+            s.RegisterForNavigation<DetailPage>();
+            
             return builder;
         }
     }

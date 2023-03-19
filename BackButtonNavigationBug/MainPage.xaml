@@ -5,6 +5,6 @@
              x:DataType="local:MainViewModel"
              x:Class="BackButtonNavigationBug.MainPage">
     <VerticalStackLayout>
-        <Button WidthRequest="100" HeightRequest="50" Text="Navigate to Detail Page" Clicked="Button_Clicked"></Button>
+        <Button WidthRequest="200" HeightRequest="50" Text="Navigate to Detail Page" Clicked="Button_Clicked" Margin="10"></Button>
     </VerticalStackLayout>
 </ContentPage>
